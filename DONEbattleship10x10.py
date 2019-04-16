@@ -75,7 +75,7 @@ def place_ship(ship_length,choose_board):  #paraméter, meghívásnál arg
                 except IndexError:
                         print("Out of range! Try again!")
                         place_ship(ship_length,choose_board)        
-        if direction=="d":
+        if direction=="d": #down
                 try:
                         for i in range(ship_length):
                                 if choose_board[y+i][x]==" ":
