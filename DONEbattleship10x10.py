@@ -1,18 +1,18 @@
 def create_board():
-        l=[]
+        board_list=[]
         for i in range(11):
-                l.append([])
+                board_list.append([])
                 for j in range(11):
                         if i==0 :
-                                l[i].append(j)
+                                board_list[i].append(j)
                         elif j==0:
-                                l[i].append(i)
+                                board_list[i].append(i)
                         else:
-                                l[i].append(' ')
-        return l
+                                board_list[i].append(' ')
+        return board_list
 
-def printboard(b):
-        for i in b:
+def print_board(choose_board):
+        for i in choose_board:
                 for j in i:
                         if j!=10 : #ne csússzon el a tábla!
                                 print(' '+str(j)+'|', end="")        
@@ -26,7 +26,7 @@ def printboard(b):
 #r=x+1
 #l=x-1
 
-def ship_place(ship_length,b):  #paraméter, meghívásnál arg
+def place_ship(ship_length,choose_board):  #paraméter, meghívásnál arg
         
         while True:
                 try:
@@ -41,111 +41,112 @@ def ship_place(ship_length,b):  #paraméter, meghívásnál arg
                 except ValueError:
                         print("It's not a number!")
         
-        direction=input("Which direction? ")
+        direction=input("Which direction?(r,l,d,u) ")
         good=[]
         if direction=="r":
                 try:
                         for i in range(ship_length):
-                                if b[y][x+i]==" ": #változó is lehet, false után break
+                                if choose_board[y][x+i]==" ": #változó is lehet, false után break
                                         good.append(True)
                                 else:
                                         good.append(False)
                         if good.count(True)==len(good):
                                 for i in range(ship_length):
-                                        b[y][x+i]='*'
+                                        choose_board[y][x+i]='*'
                         else:
                                 print("You can/'t place your ship there!")
-                                ship_place(ship_length,b) #recursive helyett loop, több függvény
+                                place_ship(ship_length,choose_board) #recursive helyett loop, több függvény
                 except IndexError:
                         print("Out of range! Try again!")
-                        ship_place(ship_length,b)
+                        place_ship(ship_length,choose_board)
         if direction=="l":
                 try:
                         for i in range(ship_length):
-                                if b[y][x-i]==" ":
+                                if choose_board[y][x-i]==" ":
                                         good.append(True)
                                 else:
                                         good.append(False)
                         if good.count(True)==len(good):
                                 for i in range(ship_length):
-                                        b[y][x-i]='*'
+                                        choose_board[y][x-i]='*'
                         else:
-                                print("You can\'t place your ship there!")
-                                ship_place(ship_length,b)
+                                print("You can't place your ship here!")
+                                place_ship(ship_length,choose_board)
                 except IndexError:
                         print("Out of range! Try again!")
-                        ship_place(ship_length)
+                        place_ship(ship_length,choose_board)        
         if direction=="d":
                 try:
                         for i in range(ship_length):
-                                if b[y+i][x]==" ":
+                                if choose_board[y+i][x]==" ":
                                         good.append(True)
                                 else:
                                         good.append(False)
                         if good.count(True)==len(good):
                                 for i in range(ship_length):
-                                        b[y+i][x]='*'
+                                        choose_board[y+i][x]='*'
                         else:
-                                print("You can\'t place your ship there!")
-                                ship_place(ship_length,b)
+                                print("You can't place your ship here!")
+                                place_ship(ship_length,choose_board)
                 except IndexError:
                         print("Out of range! Try again!")
-                        ship_place(ship_length),b
+                        place_ship(ship_length,choose_board)
         if direction=="u":
                 try:
                         for i in range(ship_length):
-                                if b[y-i][x]==" ":
+                                if choose_board[y-i][x]==" ":
                                         good.append(True)
                                 else:
                                         good.append(False)
                         if good.count(True)==len(good):
                                 for i in range(ship_length):
-                                        b[y-i][x]='*'
+                                        choose_board[y-i][x]='*'
                         else:
-                                print("You can\'t place your ship there!")
-                                ship_place(ship_length,b)
+                                print("You can't place your ship here!")
+                                place_ship(ship_length,choose_board)
                 except IndexError:
                         print("Out of range! Try again!")
-                        ship_place(ship_length,b)
+                        place_ship
+                (ship_length,choose_board)
 
 board1=create_board()
 board2=create_board()
 
 # > 1 és <= len(lista)
-printboard(board1)
+print_board(board1)
 print("Player 1, this is your board! Place your ship.")
 ship_length=int(input("Press 2 to place your first ship! "))
-ship_place(ship_length,board1)
-printboard(board1)
+place_ship(ship_length,board1)
+print_board(board1)
 ship_length=int(input("Press 3 to place your second ship! "))
-ship_place(ship_length,board1)
-printboard(board1)
+place_ship(ship_length,board1)
+print_board(board1)
 ship_length=int(input("Press 4 to place your third ship! "))
-ship_place(ship_length,board1)
-printboard(board1)
+place_ship(ship_length,board1)
+print_board(board1)
 ship_length=int(input("Press 5 to place your fourth ship! "))
-ship_place(ship_length,board1)
-printboard(board1)
+place_ship(ship_length,board1)
+print_board(board1)
 print("Player 1 - your board with ships:")
-printboard(board1)
+print_board(board1)
 print("\n"*21)
 
-printboard(board2)
+print_board(board2)
 print("Player 2, this is your board! Place your ship.")
 ship_length=int(input("Press 2 to place your first ship! "))
-ship_place(ship_length,board2)
-printboard(board2)
+place_ship(ship_length,board2)
+print_board(board2)
 ship_length=int(input("Press 3 to place your second ship! "))
-ship_place(ship_length,board2)
-printboard(board2)
+place_ship(ship_length,board2)
+print_board(board2)
 ship_length=int(input("Press 4 to place your third ship! "))
-ship_place(ship_length,board2)
-printboard(board2)
+place_ship(ship_length,board2)
+print_board(board2)
 ship_length=int(input("Press 5 to place your fourth ship! "))
-ship_place(ship_length,board2)
-printboard(board2)
+place_ship(ship_length,board2)
+print_board(board2)
 print("Player 2 - your board with ships:")
-printboard(board2)
+print_board(board2)
 print("\n"*21)
 
 guessboard1=create_board()
@@ -193,33 +194,33 @@ def winner(b):
         return False not in there_is_no_star
 
 while True:
-#        printboard(guessboard1)
+#       print_board(guessboard1)
         print("Player 1: Place your guess!")
         guess_place(guessboard1,board2)
         print("Player1 Guess board")
-        printboard(guessboard1)
+        print_board(guessboard1)
 
         print("\n" *4)
         if winner(board2):
                 print("Player 1 wins")
                 print("Player1 Ship board")
-                printboard(board1)
+                print_board(board1)
                 print("Player2 Ship board")
-                printboard(board2)
+                print_board(board2)
                 break
         #print("Player2 Guess board")
-        #printboard(guessboard2)
+        #print_board(guessboard2)
         print("Player 2: Place your guess!")
         guess_place(guessboard2,board1)
         print("Player2 Guess board")
-        printboard(guessboard2)
+        print_board(guessboard2)
 
         print("\n" *4)
         #print(board1)
         if winner(board1):
                 print("Player 2 wins")
                 print("Player1 Ship board")
-                printboard(board1)
+                print_board(board1)
                 print("Player2 Ship board")
-                printboard(board2)
+                print_board(board2)
                 break
