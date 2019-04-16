@@ -224,3 +224,5 @@ while True:
                 print("Player2 Ship board")
                 print_board(board2)
                 break
+
+print("peach in norwegian is fersken.")
